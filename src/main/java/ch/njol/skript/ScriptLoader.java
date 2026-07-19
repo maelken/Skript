@@ -913,7 +913,12 @@ public class ScriptLoader {
 			Structure structure = unloadingStructure.structure();
 
 			parser.setActive(script);
-			structure.unload();
+			try {
+				structure.unload();
+			} catch (Exception e) {
+				//noinspection ThrowableNotThrown
+				Skript.exception(e, "An error occurred while trying to unload a Structure.");
+			}
 		}
 
 		parser.setInactive();
@@ -927,7 +932,12 @@ public class ScriptLoader {
 			info.structures++;
 
 			parser.setActive(script);
-			structure.postUnload();
+			try {
+				structure.postUnload();
+			} catch (Exception e) {
+				//noinspection ThrowableNotThrown
+				Skript.exception(e, "An error occurred while trying to postUnload a Structure.");
+			}
 		}
 		parser.setInactive();
 
